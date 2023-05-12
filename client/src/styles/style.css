@@ -1,0 +1,192 @@
+@import url(./reset.css);
+/*헤더 페이지 CSS*/
+
+html,body {
+    font-size: 62.5%
+}
+
+.Header_wrap {
+    width: 100%;
+    margin-bottom: 10rem;
+    display: flex;
+    justify-content: space-between;
+}
+.Header_wrap button {
+    width: 10rem;
+    height: 50%;
+    margin: 1.6rem;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.Header_wrap img {
+    width: 10rem;
+    margin: 2rem;
+}
+
+.List_wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.List_wrap > li {
+    margin: 1rem;
+    font-size: 1.3rem;
+}
+
+/*로그인 css*/
+.login_wrap {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20rem;
+}
+
+.login_wrap input,
+.login_wrap button {
+    width: 20rem;
+    height: 5rem;
+    margin: 1rem 0 0 0;
+    border-radius: 1rem;
+}
+
+/*마이페이지 CSS*/
+.User_wrap {
+    display: flex;
+    height: 11rem;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Profile_wrap {
+    display: flex;
+    width: 55rem;
+    height: 100%;
+    font-size: 1.5rem;
+    overflow: hidden;
+    border: 0.1rem solid gainsboro;
+    border-radius: 1rem;
+}
+
+.Profile_wrap img {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    margin: 0.5rem 0 0 1rem;
+}
+
+.Userdata_wrap {
+    margin: 3rem 0 3rem 1.5rem;
+}
+.Userdata_wrap > div {
+    margin: 0.5rem 0 1.5rem 0.5rem
+}
+
+.Change_wrap {
+    display: flex;
+    text-align: center;
+}
+
+.Change_wrap button {
+    width: 10rem;
+    height: 5rem;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+}
+
+.Btn_changeID {
+    margin-right: 8rem;
+}
+
+.Check_Proj_wrap,
+.Proj_wrap {
+    height: 50rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20rem 5rem 5rem 5rem;
+}
+.Check_Proj_wrap > div,
+.Proj_wrap > div {
+    width: 40rem;
+    background-color: gray;
+    border-radius: 1rem;
+}
+.Check_Proj_wrap > div > h1,
+.Proj_wrap > div > h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    margin: 2rem 0;
+    color: white;
+}
+
+.Ing_list {
+    height: 2rem;
+    padding: 1.2rem;
+    font-size: 1.5rem;
+}
+
+/*비밀번호 변경*/
+
+.Change_PW_wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Change_PW_wrap > div {
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10rem;
+}
+
+.Change_PW_wrap form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4.5rem;
+}
+
+.Change_PW_wrap form input {
+    height: 7rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.Change_PW_wrap form button {
+    height: 3rem;
+    border-radius: 1rem;
+}
+
+/* 프로젝트 조회 */
+.Search_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown_wrap > select {
+    width: 14rem;
+    height: 4.6rem;
+    margin-right: 1rem;
+}
+
+.Searchkey_wrap {
+    display: flex;
+}
+
+.Searchkey_wrap > input {
+    height: 4rem;
+    width: 42rem;
+    padding-left: 1rem;
+}
+
+.Check_Proj_wrap {
+    justify-content: space-around;
+}

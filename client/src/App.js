@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Login from './Pages/Login';
+import Header from "./Layouts/Header";
+import Mypage from "./Pages/Mypage";
+import ChangeID from "./Pages/ChangeID";
+import ChangePW from "./Pages/ChangePW";
+import Check_Proj from "./Pages/Check_Proj";
+import Employee from "./Pages/Employee";
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/"element={<Header />}>
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/changeid" element={<ChangeID/>}/>
+        <Route path="/changepw" element={<ChangePW/>}/>
+        <Route path="/Check_Proj" element={<Check_Proj/>}/>
+        <Route path="/employee" element={<Employee/>}/>
+      </Route>
+    </Routes>
   );
 }
 
