@@ -13,7 +13,7 @@ const Header = () => {
                 <ul className="List_wrap">
                     <li><Link to="/Check_Proj">프로젝트 조회</Link></li>
                     <li><Link to="/employee">개발자 관리</Link></li>
-                    <li>평가 조회</li>
+                    <li><Link to='/evaluation'>평가 조회</Link></li>
                 </ul>
                 <button><Link to="/login">로그아웃</Link></button>
             </div>

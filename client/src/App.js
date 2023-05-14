@@ -7,6 +7,10 @@ import ChangeID from "./Pages/ChangeID";
 import ChangePW from "./Pages/ChangePW";
 import Check_Proj from "./Pages/Check_Proj";
 import Employee from "./Pages/Employee";
+import Evaluation from "./Pages/Evaluation";
+import CreateProj from "./Pages/CreateProj";
+import CreateUser from "./Pages/CreateUser";
+import CreateEval from "./Pages/CreateEval";
 
 
 const App = () => {
@@ -17,8 +21,12 @@ const App = () => {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/changeid" element={<ChangeID/>}/>
         <Route path="/changepw" element={<ChangePW/>}/>
-        <Route path="/Check_Proj" element={<Check_Proj/>}/>
+        <Route path="/check_proj" element={<Check_Proj/>}/>
         <Route path="/employee" element={<Employee/>}/>
+        <Route path="/evaluation" element={<Evaluation/>}/>
+        <Route path="/createproj" element={<CreateProj/>}/>
+        <Route path="/createuser" element={<CreateUser/>}/>
+        <Route path="/createeval" element={<CreateEval/>}/>
       </Route>
     </Routes>
   );
