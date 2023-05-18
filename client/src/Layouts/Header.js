@@ -4,14 +4,14 @@ import logo from '../assets/logo.png'
 import { Link, Outlet } from "react-router-dom";
 
 
-
+//경영진 헤더
 const Header = () => {
     return(
         <div>
             <div className="Header_wrap">
                 <img src={logo} alt="logo"/>
                 <ul className="List_wrap">
-                    <li><Link to="/Check_Proj">프로젝트 조회</Link></li>
+                    <li><Link to="/project">프로젝트 조회</Link></li>
                     <li><Link to="/employee">개발자 관리</Link></li>
                     <li><Link to='/evaluation'>평가 조회</Link></li>
                 </ul>
