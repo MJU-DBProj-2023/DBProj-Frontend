@@ -5,12 +5,12 @@ const ProjComponent = ({ items, projTitle, openModal }) => {
     <ul className="Ing">
       <h1> {projTitle} {items.length}</h1>
       {items.map((item) => (
-        <li key={item.project_id}>
+        <li key={item}>
           <div
             className="Ing_list"
-            onClick={() => openModal(item.project_id)}
+            onClick={() => openModal(item)}
           >
-            * {item.project_name}
+            * {item}
           </div>
         </li>
       ))}

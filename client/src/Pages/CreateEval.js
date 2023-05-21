@@ -34,17 +34,18 @@ const CreateEval = () => {
   const handleSubmit = (e) => {
     e.preventDefault(); // 제출 동작 막는 역할 (페이지 리로드 x)
     
-  //   axios.post("admin/createEval", formData)
-  //   .then((response) => {
-  //     // 요청 성공 시 처리할 작업
-  //     console.log("요청이 성공적으로 전송되었습니다.");
-  //     console.log("응답 데이터:", response.data);
-  //   })
-  //   .catch((error) => {
-  //     // 요청 실패 시 처리할 작업
-  //     console.error("요청이 실패하였습니다.", error);
-  //   });
-   };
+    axios
+    .post("http://localhost:3001/admin/createEval", formData)
+    .then((response) => {
+      // 요청 성공 시 처리할 작업
+      console.log("요청이 성공적으로 전송되었습니다.");
+      console.log("응답 데이터:", response.data);
+    })
+    .catch((error) => {
+      // 요청 실패 시 처리할 작업
+      console.error("요청이 실패하였습니다.", error);
+    });
+};
 
   const questionNumbers = Array.from({ length: 16 }, (_, index) => `Q${String(index + 1).padStart(3, "0")}`);
 

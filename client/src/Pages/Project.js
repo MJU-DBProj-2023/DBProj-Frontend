@@ -1,74 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 import ProjComponent from "../Components/ProjComponent";
 import ModalComponent from "../Components/ModalComponent";
 
-const data = [
+const Drop = [
   { id: null, value: "검색 조건 " },
   { id: "customer", value: "발주처" },
   { id: "date", value: "날짜" },
 ];
 
 const Project = () => {
-  const [selectValue, setSelectValue] = useState(null);
+  const [selectValue, setSelectValue] = useState(null); // 드롭다운 셀렉트
+  const [modalIsOpen, setModalIsOpen] = useState(false); // 모달 오픈
+  const [selectedItemId, setSelectedItemId] = useState(null); // 프로젝트 이름 셀렉트
+  const [searchKeyword, setSearchKeyword] = useState(""); // 검색 키워드
 
   const dropdownHandle = (e) => {
     const selectedValue = e.target.value;
-    setSelectValue(selectedValue);
+    setSelectValue(selectedValue); // 드롭다운 상태 변경
   };
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedItemId, setSelectedItemId] = useState(null);
+  const searchHandle = (e) => {
+    e.preventDefault();
+    fetchData();
+  };
 
   const openModal = (itemId) => {
     setSelectedItemId(itemId);
     setModalIsOpen(true);
-  };
+  }; // 모달 오픈 시 프로젝트id를 itemid로 받고 모달 오픈 상태 T로 바꿈
 
   const closeModal = () => {
     setModalIsOpen(false);
-  };
+  }; // 모달 클로즈 시 모달 오픈 상태 F로 바꿈
+
+  const [projectNames, setProjectNames] = useState([]);
+  const [completedProjectNames, setCompletedProjectNames] = useState([]);
+
+  const fetchData = useCallback(async () => {
+    try {
+      let url = "http://localhost:3001/index";
+      if (selectValue === 'customer') {
+        url += `/search?customer=${searchKeyword}`;
+      } else if (selectValue === 'date') {
+        url += `/search?date=${searchKeyword}`;
+      }
+      const response = await axios.get(url);
+      setProjectNames(response.data[0]);
+      setCompletedProjectNames(response.data[1]);
+    } catch (error) {
+      console.log("error name", error);
+    }
+  }, [selectValue, searchKeyword]);
+
   
-  const [items] = useState([
-    {
-      project_id: "20301580",
-      project_name: "박물관 큐레이터 앱",
-      start_project: new Date().toISOString().split("T")[0],
-      end_project: new Date().toISOString().split("T")[0],
-      PM: "박하나",
-      budget: 0,
-      dev_tool: "vs",
-      dev_skill: "spring",
-      dev_language: "java",
-      customer: "명지대학교 박물관",
-      customer_manager: "",
-      customer_phone: "",
-      customer_email: "",
-      description: "명지대학교에 있는 박물관을 소개하는 앱",
-    },
-    {
-      project_id: "20301581",
-      project_name: "대리운전 매칭 앱",
-      start_project: new Date().toISOString().split("T")[0],
-      end_project: new Date().toISOString().split("T")[0],
-      PM: "박재윤",
-      budget: 0,
-      dev_tool: "vs",
-      dev_skill: "spring",
-      dev_language: "java",
-      customer: "1577-1577",
-      customer_manager: "",
-      customer_phone: "1577-1577",
-      customer_email: "",
-      description: "대리운전 기사와 고객을 매칭하는 앱",
-    },
-  ]);
+  useEffect(() => {
+    fetchData();
+  },[fetchData]);
 
   return (
     <div>
       <div className="Search_wrap">
         <div className="dropdown_wrap">
           <select value={selectValue} onChange={dropdownHandle}>
-            {data.map((item) => (
+            {Drop.map((item) => (
               <option key={item.id} value={item.id}>
                 {item.value}
               </option>
@@ -76,20 +71,30 @@ const Project = () => {
           </select>
         </div>
         <div className="Searchkey_wrap">
-          <input placeholder="검색" />
+          <form onSubmit={searchHandle}>
+            <input type="text" placeholder="검색" className="SearchInput" onChange={() => {setSearchKeyword()}} />
+            <input className="SearchBtn" type="submit" value="검색" />
+          </form>
         </div>
       </div>
 
       <div className="Check_Proj_wrap">
-      <ProjComponent items={items} projTitle="투입" openModal={openModal} />
-      <ProjComponent items={items} projTitle="종료" openModal={openModal} />
+        <ProjComponent
+          items={projectNames}
+          projTitle="투입"
+          openModal={openModal}
+        />
+        <ProjComponent
+          items={completedProjectNames}
+          projTitle="종료"
+          openModal={openModal}
+        />
       </div>
       <ModalComponent
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="프로젝트 상세 정보"
         selectedItemId={selectedItemId}
-        items={items}
       />
     </div>
   );

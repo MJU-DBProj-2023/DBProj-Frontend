@@ -6,8 +6,9 @@ const CreateUser = () => {
     employee_id: "",
     employee_name: "",
     rrno: "",
+    email: "",
     education: "",
-    start_employee: new Date().toISOString().split("T")[0],
+    start_employment: new Date().toISOString().split("T")[0],
     address: "",
     salary: 0,
     position: "",
@@ -28,18 +29,18 @@ const CreateUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //   axios.post("admin/createUser", formData)
-  //   .then((response) => {
-  //     // 요청 성공 시 처리할 작업
-  //     console.log("요청이 성공적으로 전송되었습니다.");
-  //     console.log("응답 데이터:", response.data);
-  //   })
-  //   .catch((error) => {
-  //     // 요청 실패 시 처리할 작업
-  //     console.error("요청이 실패하였습니다.", error);
-  //   });
+    axios
+      .post("http://localhost:3001/admin/createUser", formData)
+      .then((response) => {
+        // 요청 성공 시 처리할 작업
+        console.log("요청이 성공적으로 전송되었습니다.");
+        console.log("응답 데이터:", response.data);
+      })
+      .catch((error) => {
+        // 요청 실패 시 처리할 작업
+        console.error("요청이 실패하였습니다.", error);
+      });
   };
-
 
   return (
     <div className="Form_wrap">
@@ -72,6 +73,15 @@ const CreateUser = () => {
           ></input>
         </label>
         <label>
+          이메일
+          <input
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          ></input>
+        </label>
+        <label>
           최종 학력
           <input
             type="text"
@@ -84,8 +94,8 @@ const CreateUser = () => {
           입사일
           <input
             type="date"
-            name="employee_start"
-            value={formData.employee_start}
+            name="start_employment"
+            value={formData.start_employment}
             onChange={handleChange}
           ></input>
         </label>

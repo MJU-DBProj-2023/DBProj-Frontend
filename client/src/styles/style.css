@@ -185,10 +185,14 @@ html,body {
     display: flex;
 }
 
-.Searchkey_wrap > input {
+.SearchInput {
     height: 4rem;
     width: 42rem;
     padding-left: 1rem;
+}
+
+.SearchBtn {
+    margin-left: 1rem;
 }
 
 .Check_Proj_wrap {
