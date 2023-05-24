@@ -11,7 +11,7 @@ const Header = () => {
             <div className="Header_wrap">
                 <img src={logo} alt="logo"/>
                 <ul className="List_wrap">
-                    <li><Link to="/project">프로젝트 조회</Link></li>
+                    <li><Link to="/admin/project">프로젝트 조회</Link></li>
                     <li><Link to="/admin/CreateProj">프로젝트 등록</Link></li>
                     <li><Link to='/admin/CreateUser'>개발자 등록</Link></li>
                     <li><Link to='/admin/CreateEval'>고객평가 등록</Link></li>
