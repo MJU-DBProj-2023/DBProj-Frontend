@@ -3,7 +3,7 @@ import axios from "axios";
 import ModalComponent from "../Components/ModalComponent";
 
 const Drop = [
-  { id: null, value: "검색 조건 " },
+  { id: "", value: "검색 조건 " },
   { id: "employee_id", value: "사번" },
   { id: "employee_name", value: "이름" },
   { id: "skill_set", value: "스킬셋" },
@@ -12,8 +12,8 @@ const Drop = [
 ];
 
 const Employee = () => {
-  const [selectValue, setSelectValue] = useState(null); //드롭다운값
-  const [inputText, setInputText] = useState(null); // 검색값
+  const [selectValue, setSelectValue] = useState(""); //드롭다운값
+  const [inputText, setInputText] = useState(""); // 검색값
   const [searchResults, setSearchResults] = useState([]); // 검색 결과
   const [isSearched, setIsSearched] = useState(false); // 결과 visible T/F
   const [selectedEmployeeId, setSelectedEmployeeId] = useState(null); // 선택된 사번 상태 추가
@@ -27,20 +27,33 @@ const Employee = () => {
   const handleChange = (e) => {
     const inputText = e.target.value;
     setInputText(inputText);
+    setIsSearched(false)
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.get(
-        `http://localhost:3001/employee/search?${selectValue}=${inputText}`
-      );
-      setSearchResults(response.data); // 검색 결과를 상태로 설정
-      setIsSearched(true); // 검색을 수행했음을 표시
-    } catch (error) {
-      console.error(error);
+    if (inputText === "") {
+      alert("검색어를 입력해 주세요")
+    } else if (selectValue === "") {
+      alert("검색 조건을 선택해 주세요")
+    } else {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/employee/search?${selectValue}=${inputText}`
+        );
+        console.log(response.data)
+        setSearchResults(response.data); // 검색 결과를 상태로 설정
+        if (searchResults.length !== 0 ) {
+          setIsSearched(true); // 검색을 수행했음을 표시
+        }else {
+          alert("검색 결과가 없습니다!")
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
+  
 
   const openModal = (employeeId) => {
     setSelectedEmployeeId(employeeId);
@@ -79,7 +92,12 @@ const Employee = () => {
         <div>
           {selectValue === "job_name"
             ? searchResults.map((result) => (
-                <div key={result.WorksFors[0].Employee.employee_id} onClick={(e) => openModal(result.WorksFors[0].Employee)}>
+                <div
+                  key={result.WorksFors[0].Employee.employee_id}
+                  onClick={() =>
+                    openModal(result.WorksFors[0].Employee.employee_id)
+                  }
+                >
                   <p>사번: {result.WorksFors[0].Employee.employee_id}</p>
                   <p>이름: {result.WorksFors[0].Employee.employee_name}</p>
                   <p>스킬: {result.WorksFors[0].Employee.skill_set}</p>
@@ -88,7 +106,10 @@ const Employee = () => {
                 </div>
               ))
             : searchResults.map((result) => (
-                <div key={result.employee_id} onClick={(e) => openModal(result.employee_Id)}>
+                <div
+                  key={result.employee_id}
+                  onClick={() => openModal(result.employee_id)}
+                >
                   <p>사번: {result.employee_id}</p>
                   <p>이름: {result.employee_name}</p>
                   <p>스킬: {result.skill_set}</p>
@@ -96,7 +117,6 @@ const Employee = () => {
                   <p>직책: {result.WorksFors[0].Job.job_name}</p>
                 </div>
               ))}
-          {searchResults.length === 0 && alert("검색 결과가 없습니다!")}
         </div>
       )}
       <ModalComponent
