@@ -47,6 +47,7 @@ const Employee = () => {
           setIsSearched(true); // 검색을 수행했음을 표시
         }else {
           alert("검색 결과가 없습니다!")
+          setSearchResults([])
         }
       } catch (error) {
         console.error(error);
