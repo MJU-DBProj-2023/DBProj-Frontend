@@ -18,7 +18,7 @@ import HeaderUser from "./Layouts/HeaderUser"
 const App = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Login />} />
       <Route path="/testpage" element={<TestPage/>}/>
       {/* 직원 user */}
       <Route path="/user" element={<HeaderUser/>}>
