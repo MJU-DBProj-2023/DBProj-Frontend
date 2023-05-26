@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import Modal from "react-modal";
 import axios from "axios";
-Modal.setAppElement("#root"); // 추가
+Modal.setAppElement('#root');
+
 
 const ModalComponent = ({
   isOpen,
@@ -10,28 +11,32 @@ const ModalComponent = ({
   selectedItemId
 }) => {
   const [selectedItem, setSelectedItem] = useState(null);
-  
-  const fetchData = async (itemId) => {
-    try {
-      // 서버에서 itemId에 해당하는 상세 정보를 가져오는 요청을 보냄
-      let response;
-    if (contentLabel === "직원 상세 정보") {
-      response = await axios.get(`http://localhost:3001/employee/search/detail?/$employee_id=${itemId}`); //직원 상세 정보 서버 요청
-    } else {
-      response = await axios.get(`http://localhost:3001/index/${itemId}`); // 프로젝트 상세 정보 서버 요청
-    }
-      const selectedItemData = response.data; // 서버에서 받아온 상세 정보 데이터
-      setSelectedItem(selectedItemData); // 선택된 항목의 데이터를 상태에 저장
-    } catch (error) {
-      console.error("에러", error);
-    }
-  };
 
   useEffect(() => {
-    if (selectedItemId) {
-      fetchData(selectedItemId);
+    const fetchData = async (itemId) => {
+      try {
+        // 서버에서 itemId에 해당하는 상세 정보를 가져오는 요청을 보냄
+        let response;
+      if (contentLabel === "직원 상세 정보") {
+        console.log("모달 상세아이디: ", itemId)
+        response = await axios.get(`http://localhost:3001/employee/search/detail?employee_id=${itemId}`); //직원 상세 정보 서버 요청
+      } else {
+        response = await axios.get(`http://localhost:3001/index/${itemId}`); // 프로젝트 상세 정보 서버 요청
+      }
+        console.log("response.data: ", response.data)
+        const selectedItemData = response.data; // 서버에서 받아온 상세 정보 데이터
+        setSelectedItem(selectedItemData);
+         // 선택된 항목의 데이터를 상태에 저장
+        
+        console.log("response.data: ", selectedItem)
+      } catch (error) {
+        console.error("에러", error);
+      }
+    };
+    if (isOpen && selectedItemId) {
+      fetchData(selectedItemId)
     }
-  });
+  },[isOpen, selectedItemId, contentLabel]);
 
   const renderDetails = () => {
     if (contentLabel === "직원 상세 정보") {
