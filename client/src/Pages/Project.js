@@ -1,7 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProjComponent from "../Components/ProjComponent";
 import ModalComponent from "../Components/ModalComponent";
+import { useRecoilState } from "recoil";
+import { UserAtom } from "../recoil/UserAtom";
+
+
 
 const Drop = [
   { id: null, value: "검색 조건 " },
@@ -14,6 +18,7 @@ const Project = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false); // 모달 오픈
   const [selectedItemId, setSelectedItemId] = useState(null); // 프로젝트 이름 셀렉트
   const [searchKeyword, setSearchKeyword] = useState(""); // 검색 키워드
+  const [user] = useRecoilState(UserAtom) // user 정보
 
   const dropdownHandle = (e) => {
     const selectedValue = e.target.value;
@@ -25,8 +30,14 @@ const Project = () => {
     fetchData();
   };
 
+  const handleChange = (e) => {
+    const inputText = e.target.value;
+    setSearchKeyword(inputText);
+  };
+
   const openModal = (itemId) => {
     setSelectedItemId(itemId);
+    console.log(selectedItemId)
     setModalIsOpen(true);
   }; // 모달 오픈 시 프로젝트id를 itemid로 받고 모달 오픈 상태 T로 바꿈
 
@@ -37,26 +48,47 @@ const Project = () => {
   const [projectNames, setProjectNames] = useState([]);
   const [completedProjectNames, setCompletedProjectNames] = useState([]);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     try {
-      let url = "http://localhost:3001/index";
-      if (selectValue === 'customer') {
-        url += `/search?customer=${searchKeyword}`;
-      } else if (selectValue === 'date') {
-        url += `/search?date=${searchKeyword}`;
+      const response = await axios.get(
+        `http://localhost:3001/index/search?${selectValue}=${searchKeyword}`
+      );
+      if (response.data.projectNames.length !== 0 && response.data.completedProjectNames !== 0) {
+        // 검색 결과가 있는 경우
+        setProjectNames(response.data.projectNames);
+        setCompletedProjectNames(response.data.projectNames);
+      } else {
+        alert("검색 결과가 없습니다");
+        // 검색 결과가 없는 경우
+        setProjectNames([]);
+        setCompletedProjectNames([]); //빈배열
       }
-      const response = await axios.get(url);
-      setProjectNames(response.data[0]);
-      setCompletedProjectNames(response.data[1]);
+      setProjectNames(response.data.projectNames);
+      setCompletedProjectNames(response.data.completedProjectNames);
     } catch (error) {
       console.log("error name", error);
+      // API 호출이 실패한 경우에도 적절한 상태 업데이트 수행
+      setProjectNames([]);
+      setCompletedProjectNames([]);
     }
-  }, [selectValue, searchKeyword]);
+  };
 
-  
   useEffect(() => {
-    fetchData();
-  },[fetchData]);
+    console.log("user: ", user)
+    const renderData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/index");
+        setProjectNames(response.data.projectNames);
+        setCompletedProjectNames(response.data.completedProjectNames);
+      } catch (error) {
+        console.log("error name", error);
+        // API 호출이 실패한 경우에도 적절한 상태 업데이트 수행
+        setProjectNames([]);
+        setCompletedProjectNames([]);
+      }
+    };
+    renderData();
+  }, []);
 
   return (
     <div>
@@ -72,7 +104,12 @@ const Project = () => {
         </div>
         <div className="Searchkey_wrap">
           <form onSubmit={searchHandle}>
-            <input type="text" placeholder="검색" className="SearchInput" onChange={() => {setSearchKeyword()}} />
+            <input
+              type="text"
+              placeholder="검색"
+              className="SearchInput"
+              onChange={handleChange}
+            />
             <input className="SearchBtn" type="submit" value="검색" />
           </form>
         </div>
