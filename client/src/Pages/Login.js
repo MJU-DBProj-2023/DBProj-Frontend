@@ -3,31 +3,36 @@ import "../styles/style.css";
 import logo from "../assets/logo.png";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { UserAtom } from "../recoil/UserAtom";
+import { useRecoilState } from "recoil";
 
-const Login = (props) => {
+const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState({});
+  const [user, setUser] = useRecoilState(UserAtom);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios
-      .post(`http://localhost:3001/user/login`, {
+    console.log(user)
+    try {
+      const response = await axios.post(`http://localhost:3001/user/login`, {
         id: e.target.id.value,
         password: e.target.password.value,
         headers: {
           "Content-type": "application/json",
           withCredentials: true,
         },
-      })
-      .then((response) => {
-        console.log(response.data.message);
-        console.log(response.data.user);
-        setUser(response.data.user);
-      })
-      .catch((error) => {
-        console.error(error);
       });
+      if (response.data.user) {
+        alert(response.data.message);
+        console.log(response.data.user)
+        setUser(response.data.user);
+      } else {
+        console.log("User not found")
+      }
+    } catch (error) {
+      alert(error.response.data);
+    }
   };
 
   return (
@@ -61,7 +66,7 @@ const Login = (props) => {
           else if (user && user.auth_code === 2) {
             return <Navigate to="/admin/project" />;
           } else {
-            return <Navigate to="/login" />;
+            return <Navigate to="/" />;
           }
         })()}
       </form>

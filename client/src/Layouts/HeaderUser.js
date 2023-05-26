@@ -2,10 +2,13 @@ import React from "react";
 import '../styles/style.css'
 import logo from '../assets/logo.png'
 import { Link, Outlet } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { UserAtom } from "../recoil/UserAtom";
 
 
 //직원 헤더
 const Header = () => {
+    const [user,setUser] = useRecoilState(UserAtom);
     return(
         <div>
             <div className="Header_wrap">
@@ -15,7 +18,7 @@ const Header = () => {
                     <li><Link to="/user/project">프로젝트 조회</Link></li>
                     <li><Link to='/user/evaluation'>평가 조회</Link></li>
                 </ul>
-                <button><Link to="/login">로그아웃</Link></button>
+                <button onClick={() => {setUser([])}}><Link to="/">로그아웃</Link></button>
             </div>
             <div>
                 <Outlet/>
