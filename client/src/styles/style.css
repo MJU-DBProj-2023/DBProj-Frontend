@@ -104,7 +104,7 @@ html,body {
     margin-right: 8rem;
 }
 
-.Check_Proj_wrap,
+
 .Proj_wrap {
     display: flex;
     flex-direction: row;
@@ -132,7 +132,7 @@ html,body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20rem 5rem 5rem 5rem;   
+    margin: 15rem 5rem 5rem 5rem;   
 }
 
 .EvalList {
@@ -195,10 +195,12 @@ html,body {
 }
 
 /* 프로젝트 조회 */
+.FilterWrap,
 .Search_wrap {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 1rem;
 }
 
 .dropdown_wrap > select {
@@ -222,14 +224,76 @@ html,body {
 }
 
 .Check_Proj_wrap {
-    justify-content: space-around;
+    display: flex;
+    justify-content: center;
+}
+
+.ShowProj {
+    display: flex;
+    justify-content: center;
+    margin: 5rem 0 8rem;
+}
+
+.ShowProj button {
+    font-size: 2rem;
+}
+
+.ShowProgress {
+    margin-right: 1rem;
+}
+
+/* 프로젝트 컴포넌트 */ 
+
+.ProjTable {
+    font-size: 2rem;
+}
+
+.ProjTable thead {
+    background-color: grey;
+    color: white;
+    text-align: left;
+}
+
+.ProjTable td,
+.ProjTable th {
+    padding: 2rem;
+    border-bottom: 0.1rem solid white;
+}
+
+.ProjTable tbody {
+    background-color: gainsboro;
+}
+
+.ProjTitle {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
 }
 
 /*평가 조회*/
 .Eval_wrap {
     justify-content: center;
-
 }
+
+.EvalTable {
+    font-size: 2rem;
+}
+
+.EvalTable thead {
+    background-color: grey;
+    color: white;
+    text-align: left;
+}
+
+.EvalTable td,
+.EvalTable th {
+    padding: 2rem;
+    border-bottom: 0.1rem solid white;
+}
+
+.EvalTable tbody {
+    background-color: gainsboro;
+}
+
 
 /*프로젝트 등록*/
 .Form_wrap {
@@ -278,6 +342,57 @@ html,body {
     flex-direction: column;
     align-items: center;
 }
+.project-details {
+    text-align: center;
+  }
+  
+  .project-name {
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .project-info {
+    display: inline-block;
+    text-align: left;
+    margin-top: 1rem;
+  }
+  
+  .works-for {
+    margin-top: 10rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .works-for-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .works-for-item-wrap {
+    display: flex;
+    align-items: center;
+    background-color: aqua;
+    margin-bottom: 2rem;
+  }
+  
+  .works-for-item {
+    margin-bottom: 1rem;
+    border: 0.1rem solid #ccc;
+    padding: 1rem;
+    margin-right: 1rem;
+  }
+
+
+  .detailItemWrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detailItem {
+    border: 0.1rem solid #ccc;
+  }
 
 /* 개발자 결과 조회 */
 .EmployeeWrap {
@@ -312,6 +427,15 @@ html,body {
     background-color: gainsboro;
 }
 
-.EmployeeItem {
+.Test {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+}
+.TestDrop > select {
+    width: 14rem;
+    height: 4.6rem;
+    margin-right: 1rem;
 }
 
