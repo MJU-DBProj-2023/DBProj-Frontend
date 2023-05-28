@@ -15,13 +15,9 @@ const Header = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.post(`http://localhost:3001/user/logout`, {
-            headers: {
-              "Content-type": "application/json",
-              withCredentials: true,
-            },
-          });
+          const response = await axios.post(`http://localhost:3001/user/logout`);
           console.log(response.data)
+          setUser([])
           navigate("/")
         } catch (error) {
           alert(error.response.data);
@@ -37,7 +33,7 @@ const Header = () => {
                     <li><Link to='/admin/CreateUser'>개발자 등록</Link></li>
                     <li><Link to='/admin/CreateEval'>고객평가 등록</Link></li>
                 </ul>
-                <button onClick={handleSubmit}><Link to="/">로그아웃</Link></button>
+                <button onClick={handleSubmit}>로그아웃</button>
             </div>
             <div>
                 <Outlet/>

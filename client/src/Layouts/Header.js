@@ -17,6 +17,7 @@ const Header = () => {
         try {
           const response = await axios.post(`http://localhost:3001/user/logout`);
           console.log(response.data)
+          setUser([])
           navigate("/")
         } catch (error) {
           alert(error.response.data);
@@ -31,7 +32,7 @@ const Header = () => {
             <li><Link to="/executive/employee">개발자 관리</Link></li>
             <li><Link to='/executive/evaluation'>평가 조회</Link></li>
           </ul>
-          <button onClick={handleSubmit}><Link to="/">로그아웃</Link></button>
+          <button onClick={handleSubmit}>로그아웃</button>
         </div>
         <div>
           <Outlet />
