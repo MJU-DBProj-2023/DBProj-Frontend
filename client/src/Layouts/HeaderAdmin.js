@@ -1,14 +1,32 @@
 import React from "react";
 import '../styles/style.css'
 import logo from '../assets/logo.png'
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../recoil/UserAtom";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 
 //관리자 헤더
 const Header = () => {
     const [user,setUser] = useRecoilState(UserAtom);
+    const navigate = useNavigate();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const response = await axios.post(`http://localhost:3001/user/logout`, {
+            headers: {
+              "Content-type": "application/json",
+              withCredentials: true,
+            },
+          });
+          console.log(response.data)
+          navigate("/")
+        } catch (error) {
+          alert(error.response.data);
+        }
+      };
     return(
         <div>
             <div className="Header_wrap">
@@ -19,7 +37,7 @@ const Header = () => {
                     <li><Link to='/admin/CreateUser'>개발자 등록</Link></li>
                     <li><Link to='/admin/CreateEval'>고객평가 등록</Link></li>
                 </ul>
-                <button onClick={() => {setUser([])}}><Link to="/">로그아웃</Link></button>
+                <button onClick={handleSubmit}><Link to="/">로그아웃</Link></button>
             </div>
             <div>
                 <Outlet/>
