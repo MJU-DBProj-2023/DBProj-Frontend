@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import ModalComponent from "../Components/ModalComponent";
+axios.defaults.withCredentials = true;
 
 const Drop = [
   { id: "", value: "검색 조건 " },
@@ -18,6 +19,9 @@ const Employee = () => {
   const [isSearched, setIsSearched] = useState(false); // 결과 visible T/F
   const [selectedEmployeeId, setSelectedEmployeeId] = useState(""); // 선택된 사번 상태 추가
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
+  const [filterLevel, setFilterLevel] = useState(""); // 필터링 개발레벨값
+  const [filterSkill, setFilterSkill] = useState(""); // 필터링 스킬셋값
+  const [filterJob, setFilterJob] = useState(""); // 필터링 직무값
 
   const dropdownHandle = (e) => {
     const selectedValue = e.target.value;
@@ -28,6 +32,21 @@ const Employee = () => {
     const inputText = e.target.value;
     setInputText(inputText);
     setIsSearched(false);
+  };
+
+  const handleFilterLevel = (e) => {
+    const level = e.target.value;
+    setFilterLevel(level);
+  };
+
+  const handleFilterSkill = (e) => {
+    const skill = e.target.value;
+    setFilterSkill(skill);
+  };
+
+  const handleFilterJob = (e) => {
+    const job = e.target.value;
+    setFilterJob(job);
   };
 
   const handleSubmit = async (e) => {
@@ -71,7 +90,8 @@ const Employee = () => {
 
   return (
     <div>
-      <div className="Search_wrap">
+      <div>
+        <div className="Search_wrap">
         <div className="dropdown_wrap">
           <select value={selectValue} onChange={dropdownHandle}>
             {Drop.map((item) => (
@@ -92,6 +112,32 @@ const Employee = () => {
             <input className="SearchBtn" type="submit" value="검색" />
           </form>
         </div>
+      </div>
+      <div className="FilterWrap">
+        <label htmlFor="filter-level">개발 레벨:</label>
+        <input
+          type="text"
+          id="filter-level"
+          value={filterLevel}
+          onChange={handleFilterLevel}
+        />
+
+        <label htmlFor="filter-skill">스킬셋:</label>
+        <input
+          type="text"
+          id="filter-skill"
+          value={filterSkill}
+          onChange={handleFilterSkill}
+        />
+
+        <label htmlFor="filter-job">직책:</label>
+        <input
+          type="text"
+          id="filter-job"
+          value={filterJob}
+          onChange={handleFilterJob}
+        />
+      </div>
       </div>
       {isSearched && (
         <div className="EmployeeWrap">
