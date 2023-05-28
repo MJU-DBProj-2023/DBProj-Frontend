@@ -4,6 +4,7 @@ axios.defaults.withCredentials = true;
 
 const ChangePW = () => {
   const [email, setEmail] = useState("");
+  const [statusVerification, setStatusVerification] = useState(false);
   const [verify_code, setVerify_code] = useState("");
   const [currPassword, setCurrPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -22,9 +23,9 @@ const ChangePW = () => {
           },
         }
       );
-      alert(response.data)
+      alert(response.data);
     } catch (error) {
-      alert(error)
+      alert(error);
     }
   };
 
@@ -41,14 +42,20 @@ const ChangePW = () => {
           },
         }
       );
-      alert(response.data)
+      alert(response.data);
+      if (response.status == 200) {
+        setStatusVerification(true);
+      }
     } catch (error) {
-      alert(error)
+      alert(error);
     }
   };
 
   const handleChangePW = async (e) => {
     e.preventDefault();
+    if (!statusVerification) {
+      alert("이메일 본인인증을 완료해주세요");
+    }
     try {
       if (currPassword === "" && newPassword === "" && checkPW === "") {
         alert("입력을 확인해 주세요");
@@ -56,26 +63,27 @@ const ChangePW = () => {
         alert("새로 입력한 비밀번호가 일치하지 않습니다");
       } else {
       }
-      const response = await axios.patch(
-        `http://localhost:3001/user/resetPW`,
-        {
-          currPassword: currPassword,
-          newPassword: newPassword,
-          headers: {
-            "Content-type": "application/json",
-            withCredentials: true,
-          },
-        }
-      );
-      alert(response.data)
+      const response = await axios.patch(`http://localhost:3001/user/resetPW`, {
+        currPassword: currPassword,
+        newPassword: newPassword,
+        headers: {
+          "Content-type": "application/json",
+          withCredentials: true,
+        },
+      });
+      alert(response.data);
     } catch (error) {
-      alert(error)
+      alert(error);
     }
   };
   return (
     <div className="Change_PW_wrap">
       <div>
+        <h3 className="change_password_title">비밀번호 변경</h3>
         <form onSubmit={handleEmail}>
+          <h3 className="change_password_title">
+            이메일 본인인증을 진행해주세요
+          </h3>
           <input
             type="email"
             placeholder="이메일"
