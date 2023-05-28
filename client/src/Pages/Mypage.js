@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/style.css";
 import profile from "../assets/profile.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ModalComponent from "../Components/ModalComponent";
 import ProjComponent from "../Components/ProjComponent";
 import { useRecoilState } from "recoil";
@@ -16,6 +16,7 @@ const Mypage = () => {
   const [employee, setEmployee] = useState({});
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const navigate = useNavigate();
 
   const openModal = (itemId) => {
     setSelectedItemId(itemId);
@@ -32,8 +33,12 @@ const Mypage = () => {
     const renderData = async () => {
       try {
         const response = await axios.get("http://localhost:3001/mypage");
-        setEmployee(response.data.employee[0])
+        setEmployee(response.data.employee)
       } catch (error) {
+        if (error.response.status === 401) {
+          alert("로그인을 진행해 주세요")
+          navigate("/")        
+        }
         console.log("error name", error);
         // API 호출이 실패한 경우에도 적절한 상태 업데이트 수행
       }
