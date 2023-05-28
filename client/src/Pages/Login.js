@@ -5,6 +5,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { UserAtom } from "../recoil/UserAtom";
 import { useRecoilState } from "recoil";
+axios.defaults.withCredentials = true;
 
 const Login = () => {
   const [id, setId] = useState("");
