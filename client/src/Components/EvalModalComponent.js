@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Modal from "react-modal";
 import axios from "axios";
 
@@ -17,27 +18,99 @@ const EvalModalComponent = ({ isOpen, onRequestClose, projectId }) => {
       }
     };
     if (isOpen && projectId) {
-        fetchProjectDetails();
-      }
-    }, [isOpen, projectId]);
+      fetchProjectDetails();
+    }
+  }, [isOpen, projectId]);
+
+  const calculateAverageScore = (result) => {
+    const sum = result.avg_cus_score + result.avg_pm_score + result.avg_co_score;
+    return sum / 3;
+  };
+
+  const BarGraph = ({ averageScore }) => {
+    const [barWidth, setBarWidth] = useState(0);
+  
+    useEffect(() => {
+      let intervalId;
+      let width = 0;
+  
+      const animateBar = () => {
+        intervalId = setInterval(() => {
+          if (width >= averageScore * 10) {
+            clearInterval(intervalId);
+          } else {
+            width += 1;
+            setBarWidth(width);
+          }
+        }, 2);
+      };
+  
+      animateBar();
+  
+      return () => {
+        clearInterval(intervalId);
+      };
+    }, [averageScore]);
+  
+    const barStyles = {
+      width: `${barWidth}%`,
+      backgroundColor: 'red',
+      height: '2rem',
+      transition: 'width 1s ease-in-out'
+    };
+  
+    return (
+      <div className="bar-graph">
+        <div className="bar" style={barStyles}></div>
+        <p className="bar-value">{averageScore.toFixed(2)}</p>
+      </div>
+    );
+  };
+  
+  
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      {/* 모달 내용을 추가하거나 수정하세요 */}
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      style={{
+        overlay: {
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+        },
+        content: {
+          width: "30%",
+          top: "10%",
+          left: "35%",
+        },
+      }}
+    >
       {evalDetails ? (
-        <div>
-          <h2>평가 상세 정보</h2>
-          <p>프로젝트명: {evalDetails.project_name}</p>
-          
+        <div className="EvalDetail">
+          <p className="EvalDetailName">{evalDetails.project_name}</p>
+          <p className="EvalDetailCount">투입 직원 {evalDetails.employees.length}</p>
           {evalDetails.employees.map((result, employee_id) => {
+            const averageScore = calculateAverageScore(result);
+
             return (
-                <div key={employee_id}>
-                  <p>이름: {result.employee_name}</p>
-                  <p>PM 평가: {result.avg_pm_score}</p>
-                  <p>고객 평가: {result.avg_cus_score}</p>
-                  <p>동료 평가: {result.avg_co_score}</p>
+              <div key={employee_id} className="EvalWrap">
+                <div>{result.employee_name}</div>
+                <div className="EvalDetailWrap">
+                  <div>
+                    <p>고객 평가</p>
+                    <p>{result.avg_cus_score}</p>
+                  </div>
+                  <div>
+                    <p>PM 평가</p>
+                    <p>{result.avg_pm_score}</p>
+                  </div>
+                  <div>
+                    <p>동료 평가</p>
+                    <p>{result.avg_co_score}</p>
+                  </div>
                 </div>
-              );
+                <BarGraph averageScore={averageScore} />
+              </div>
+            );
           })}
           <button onClick={onRequestClose}>닫기</button>
         </div>
@@ -45,6 +118,8 @@ const EvalModalComponent = ({ isOpen, onRequestClose, projectId }) => {
         <p>Loading...</p>
       )}
     </Modal>
+ 
+
   );
 };
 

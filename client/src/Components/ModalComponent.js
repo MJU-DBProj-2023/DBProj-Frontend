@@ -70,27 +70,58 @@ const ModalComponent = ({
             <div className="project-info">
               <div className="detailItemWrap">
                 <p>프로젝트 ID</p>
-                <div className="detailItem">
-                  <p>{selectedItem[0].project_id}</p>
-                </div>
+                <div>{selectedItem[0].project_id}</div>
               </div>
-
-              <p>시작일: {selectedItem[0].start_project}</p>
-              <p>종료일: {selectedItem[0].end_project}</p>
-              <p>PM: {selectedItem[0].PM}</p>
-              <p>예산: {selectedItem[0].budget}</p>
-              <p>개발 도구: {selectedItem[0].dev_tool}</p>
-              <p>개발 기술: {selectedItem[0].dev_skill}</p>
-              <p>개발 언어: {selectedItem[0].dev_language}</p>
-              <p>고객: {selectedItem[0].customer}</p>
-              <p>고객 담당자: {selectedItem[0].customer_manager}</p>
-              <p>고객 전화번호: {selectedItem[0].customer_phone}</p>
-              <p>고객 이메일: {selectedItem[0].customer_email}</p>
-              <p>프로젝트 설명: {selectedItem[0].description}</p>
+              <div className="detailItemWrap">
+                <p>시작일</p>
+                <div>{selectedItem[0].start_project}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>종료일</p>
+                <div>{selectedItem[0].end_project}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>PM</p>
+                <div>{selectedItem[0].PM}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>예산</p>
+                <div>{selectedItem[0].budget}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>개발 도구</p>
+                <div>{selectedItem[0].dev_tool}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>개발 기술</p>
+                <div>{selectedItem[0].dev_skill}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>개발 언어</p>
+                <div>{selectedItem[0].dev_language}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>고객</p>
+                <div>{selectedItem[0].customer}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>고객 담당자</p>
+                <div>{selectedItem[0].customer_manager}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>고객 전화번호</p>
+                <div>{selectedItem[0].customer_phone}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>고객 이메일</p>
+                <div>{selectedItem[0].customer_email}</div>
+              </div>
+              <div className="detailItemWrap">
+                <p>프로젝트 설명</p>
+                <div>{selectedItem[0].description}</div>
+              </div>
             </div>
-          </div>
-
-          <div className="works-for">
+            <div className="works-for">
             <p className="works-for-title">프로젝트 진행 직원</p>
             <div className="works-for-item-wrap">
               {selectedItem[0].works_for.map((item) => (
@@ -103,6 +134,9 @@ const ModalComponent = ({
               ))}
             </div>
           </div>
+          </div>
+
+          
         </>
       );
     }
@@ -113,6 +147,16 @@ const ModalComponent = ({
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel={contentLabel}
+      style={{
+        overlay: {
+          backgroundColor: 'rgba(0, 0, 0, 0.5)', // 모달 외부 배경색
+        },
+        content: {
+          width: '30%', // 모달 너비 설정
+          top: '10%', // 모달 상단 위치 설정
+          left: '35%', // 모달 좌측 위치 설정
+        },
+      }}
     >
       {selectedItem && (
         <div className="Modal_wrap">

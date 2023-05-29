@@ -53,15 +53,14 @@ const Evaluation = () => {
     const renderData = async () => {
       try {
         const response = await axios.get("http://localhost:3001/eval");
-        setSearchResults(response.data.projectNames
-          );
+        setSearchResults(response.data.projectNames);
       } catch (error) {
         console.log("error name", error);
         // API 호출이 실패한 경우에도 적절한 상태 업데이트 수행
       }
     };
     renderData();
-    console.log(searchResults)
+    console.log(searchResults);
   }, []);
 
   return (
@@ -71,12 +70,13 @@ const Evaluation = () => {
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="프로젝트명 검색"
+              placeholder="평가를 확인할 프로젝트명을 검색하세요"
               className="SearchInput"
               onChange={handleChange}
             />
-            <input className="SearchBtn" type="submit" value="검색" />
+            <input className="SearchBtn" type="submit" value="" alt="검색" />
           </form>
+          <hr style={{ width: 50 + "rem" }} />
         </div>
       </div>
 
@@ -93,7 +93,10 @@ const Evaluation = () => {
             </thead>
             <tbody>
               {searchResults.map((result, project_id) => (
-                <tr key={project_id} onClick={() => handleModalOpen(result.project_id)}>
+                <tr
+                  key={project_id}
+                  onClick={() => handleModalOpen(result.project_id)}
+                >
                   <td>{result.project_name}</td>
                   <td>{result.avg_cus_rating}</td>
                   <td>{result.avg_PM_rating}</td>
@@ -104,10 +107,11 @@ const Evaluation = () => {
           </table>
         </div>
       </div>
-      <EvalModalComponent 
-      isOpen={modalIsOpen}
-      onRequestClose={handleModalClose}
-      projectId={selectedProjectId} />
+      <EvalModalComponent
+        isOpen={modalIsOpen}
+        onRequestClose={handleModalClose}
+        projectId={selectedProjectId}
+      />
     </div>
   );
 };

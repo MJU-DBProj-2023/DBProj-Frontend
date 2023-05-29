@@ -1,441 +1,767 @@
 @import url(./reset.css);
 /*헤더 페이지 CSS*/
 
-html,body {
-    font-size: 62.5%
+html,
+body {
+  font-size: 62.5%;
 }
 
 .Header_wrap {
-    width: 100%;
-    margin-bottom: 10rem;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  margin-bottom: 5rem;
+  display: flex;
+  justify-content: space-between;
 }
+
 .Header_wrap button {
-    width: 10rem;
-    height: 50%;
-    margin: 1.6rem;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
+  width: 8rem;
+  height: 3rem;
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  border: none;
+  margin-right: 4rem;
+  margin-top: 2.3rem;
+}
+
+.Header_wrap button :visited {
+  color: white;
+  text-decoration: none;
+}
+
+.Header_wrap button :link {
+  color: white;
+  text-decoration: none;
 }
 
 .Header_wrap img {
-    width: 10rem;
-    margin: 2rem;
+  width: 25rem;
+  height: 4.2rem;
+  margin-top: 3rem;
+  margin-left: 4rem;
 }
 
 .List_wrap {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 75rem;
+  margin-top: 0.5rem;
+}
+.List_wrap_admin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 50rem;
+  margin-top: 0.5rem;
 }
 
-.List_wrap > li {
-    margin: 1rem;
-    font-size: 1.3rem;
+.List_wrap_admin>li,
+.List_wrap>li {
+  width: 10rem;
+  margin-right: 1rem;
+  font-size: 1.3rem;
+  color: black;
+  text-decoration: none;
+}
+
+.List_wrap_admin>li :link,
+.List_wrap>li :link {
+  color: black;
+  text-decoration: none;
+}
+
+.List_wrap_admin>li :visited,
+.List_wrap>li :visited {
+  color: black;
+  text-decoration: none;
+}
+
+/*아이디 변경 css*/
+.change_login_wrap {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5rem;
+}
+
+.change_login_title {
+  display: block;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  width: 20rem;
+  margin: auto;
+  margin-top: 18rem;
+}
+
+.chane_login_currId {
+  display: block;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 20rem;
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+}
+
+.change_login_input {
+  width: 23rem;
+  height: 4rem;
+  border: none;
+  border-bottom: 0.1px solid;
+  border-bottom-color: black;
+  margin-bottom: 0.2rem;
+}
+
+.change_login_input:focus {
+  outline: none;
+}
+
+.change_login_submit {
+  width: 24rem;
+  height: 4rem;
+  font-size: 1.5rem;
+  background-color: black;
+  color: white;
+  margin-top: 3rem;
 }
 
 /*로그인 css*/
 .login_wrap {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 20rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5rem;
 }
 
-.login_wrap input,
-.login_wrap button {
-    width: 20rem;
-    height: 5rem;
-    margin: 1rem 0 0 0;
-    border-radius: 1rem;
+.login_title {
+  display: block;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  width: 20rem;
+  margin: auto;
+  margin-top: 18rem;
 }
+
+.login_input {
+  width: 23rem;
+  height: 4rem;
+  border: none;
+  border-bottom: 0.1px solid;
+  border-bottom-color: black;
+  margin-bottom: 1rem;
+}
+
+.login_input:focus {
+  outline: none;
+}
+
+.login_submit {
+  width: 24rem;
+  height: 4rem;
+  font-size: 1.5rem;
+  background-color: black;
+  color: white;
+  margin-top: 3rem;
+}
+
+/* 
+.login_wrap button {
+  width: 200rem;
+  height: 5rem;
+  margin: 1rem 0 0 0;
+} */
 
 /*마이페이지 CSS*/
+.Mypage_title_wrap {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Mypage_title_desc {
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  margin-left: 10rem;
+}
+
+.Mypage_title {
+  font-size: 4em;
+  margin-top: 8rem;
+  margin-bottom: 1rem;
+  margin-left: 10rem;
+  font-weight: bold;
+}
+
 .User_wrap {
-    display: flex;
-    height: 11rem;
-    justify-content: space-around;
-    align-items: center;
+  display: flex;
+  height: 11rem;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .Profile_wrap {
-    display: flex;
-    width: 55rem;
-    height: 100%;
-    font-size: 1.5rem;
-    overflow: hidden;
-    border: 0.1rem solid gainsboro;
-    border-radius: 1rem;
-    margin-right: 1rem;
+  display: flex;
+  width: 55rem;
+  height: 100%;
+  font-size: 1.5rem;
+  overflow: hidden;
+  border: 0.1rem solid gainsboro;
+  border-radius: 1rem;
+  margin-left: 10rem;
 }
 
 .Profile_wrap img {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
-    margin: 0.5rem 0 0 1rem;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  margin: 0.5rem 0 0 1rem;
 }
 
 .Userdata_wrap {
-    margin: 3rem 0 3rem 1.5rem;
+  margin: 3rem 0 3rem 1.5rem;
 }
-.Userdata_wrap > div {
-    margin: 0.5rem 0 1.5rem 0.5rem
+
+.Userdata_wrap>div {
+  margin: 0.5rem 0 1.5rem 0.5rem;
 }
 
 .Change_wrap {
-    display: flex;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  margin-right: 90rem;
 }
 
 .Change_wrap button {
-    width: 10rem;
-    height: 5rem;
-    background-color: gray;
-    color: white;
-    border: none;
-    border-radius: 1rem;
+  width: 10rem;
+  height: 3rem;
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  border: none;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
+.Change_wrap button :link {
+  color: white;
+  text-decoration: none;
+}
+
+.Change_wrap button :visited {
+  color: white;
+  text-decoration: none;
+}
+
+.Btn_changePW,
 .Btn_changeID {
-    margin-right: 8rem;
+  margin-left: 8rem;
 }
-
 
 .Proj_wrap {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 20rem 5rem 5rem 5rem;
-}
-.Check_Proj_wrap > ul,
-.Proj_wrap > ul {
-    width: 40rem;
-    background-color: gainsboro;
-    border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 20rem 5rem 5rem 5rem;
 }
 
-.EvalList > h1,
-.Check_Proj_wrap > ul > h1,
-.Proj_wrap > ul > h1 {
-    width: 100%;
-    text-align: center;
-    font-size: 3rem;
-    margin: 2rem 0;
-    color: white;
+.ProjListWrap {
+  width: 40rem;
+  height: 50rem;
+  background-color: #ccc;
+  display: flex;
+  text-align: center;
+}
+
+.Check_Proj_wrap>ul,
+.Proj_wrap>ul {
+  width: 40rem;
+  background-color: gainsboro;
+  border-radius: 1rem;
+}
+
+.EvalList>h1,
+.Check_Proj_wrap>ul>h1,
+.Proj_wrap>ul>h1 {
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  margin: 2rem 0;
+  color: white;
 }
 
 .Eval_wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 15rem 5rem 5rem 5rem;   
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10rem 5rem 5rem 5rem;
 }
 
 .EvalList {
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    padding: 2rem 10rem;
-    border-bottom: solid;
-    background-color: gainsboro;
-    border-radius: 1rem;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 10rem;
+  border-bottom: solid;
+  background-color: gainsboro;
+  border-radius: 1rem;
 }
 
-.EvalList > span {
-    font-size: 1.8rem;
+.EvalList>span {
+  font-size: 1.8rem;
 }
 
 .EvalItem img {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    overflow: hidden;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .Ing_list {
-    height: 2rem;
-    padding: 1.2rem;
-    font-size: 1.5rem;
+  height: 2rem;
+  padding: 1.2rem;
+  font-size: 1.5rem;
 }
 
 /*비밀번호 변경*/
 
 .Change_PW_wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.Change_PW_wrap > div {
-    width: 25rem;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10rem;
+.Change_PW_wrap>div {
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10rem;
 }
 
 .Change_PW_wrap form {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4.5rem;
 }
 
 .Change_PW_wrap form input {
-    height: 7rem;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
+  width: 23rem;
+  height: 4rem;
+  border: none;
+  border-bottom: 0.1px solid;
+  border-bottom-color: black;
+  margin-bottom: 0.2rem;
 }
 
-.Change_PW_wrap form button {
-    height: 3rem;
-    border-radius: 1rem;
+.Change_PW_wrap form input:focus {
+  outline: none;
+}
+
+.change_pw_submit {
+  width: 24rem;
+  height: 3.5rem;
+  font-size: 1.3rem;
+  background-color: black;
+  color: white;
+  margin-top: 3rem;
+}
+
+.change_pw_title {
+  display: block;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  width: 20rem;
+  margin: auto;
+  margin-top: 8rem;
+}
+
+.change_pw_subtitle {
+  display: inline-block;
+  text-align: center;
+  font-size: 1.2rem;
+  width: 20rem;
+  margin-top: 5rem;
+  margin-right: 20rem;
+  text-align: left;
+  color: crimson;
 }
 
 /* 프로젝트 조회 */
 .FilterWrap,
 .Search_wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.dropdown_wrap > select {
-    width: 14rem;
-    height: 4.6rem;
-    margin-right: 1rem;
+.dropdown_wrap>select {
+  border: none;
+  border-bottom: 0.1rem solid;
+  width: 11rem;
+  height: 4.6rem;
+  margin-right: 4rem;
 }
 
-.Searchkey_wrap {
-    display: flex;
+.Searchkey_wrap>form {
+  display: flex;
+  flex-direction: row;
 }
 
 .SearchInput {
-    height: 4rem;
-    width: 42rem;
-    padding-left: 1rem;
+  border: none;
+  height: 4rem;
+  width: 42rem;
+  padding-left: 1rem;
+}
+
+.SearchInput:focus {
+  outline: none;
+}
+
+.SearchInput[readonly] {
+  background-color: #f2f2f2;
 }
 
 .SearchBtn {
-    margin-left: 1rem;
-}
-
-.Check_Proj_wrap {
-    display: flex;
-    justify-content: center;
+  background: url("../assets//search.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: none;
+  margin-left: 4rem;
 }
 
 .ShowProj {
-    display: flex;
-    justify-content: center;
-    margin: 5rem 0 8rem;
+  margin-top: 5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .ShowProj button {
-    font-size: 2rem;
+  background-color: black;
+  color: white;
+  width: 10rem;
+  height: 4rem;
+  border: none;
 }
 
-.ShowProgress {
-    margin-right: 1rem;
+.Check_Proj_wrap {
+  margin-top: 5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-/* 프로젝트 컴포넌트 */ 
+/* 프로젝트컴포넌트 */
+
+.ProjTitle {
+  font-size: 2rem;
+  font-weight: bold;
+}
 
 .ProjTable {
-    font-size: 2rem;
+  margin-top: 2rem;
+  font-size: 2rem;
 }
 
 .ProjTable thead {
-    background-color: grey;
-    color: white;
-    text-align: left;
+  background-color: #3b3b3b;
+  color: white;
+  text-align: left;
 }
 
 .ProjTable td,
 .ProjTable th {
-    padding: 2rem;
-    border-bottom: 0.1rem solid white;
+  padding: 2rem;
+  border-bottom: 0.1rem solid white;
 }
 
 .ProjTable tbody {
-    background-color: gainsboro;
-}
-
-.ProjTitle {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
+  background-color: gainsboro;
 }
 
 /*평가 조회*/
 .Eval_wrap {
-    justify-content: center;
+  justify-content: center;
 }
 
 .EvalTable {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .EvalTable thead {
-    background-color: grey;
-    color: white;
-    text-align: left;
+  background-color: #3b3b3b;
+  color: white;
+  text-align: left;
 }
 
 .EvalTable td,
 .EvalTable th {
-    padding: 2rem;
-    border-bottom: 0.1rem solid white;
+  padding: 2rem;
+  border-bottom: 0.1rem solid white;
 }
 
 .EvalTable tbody {
-    background-color: gainsboro;
+  background-color: gainsboro;
 }
-
 
 /*프로젝트 등록*/
 .Form_wrap {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .Form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Form label {
-    width: 50rem;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem ;
-    font-size: 1.3rem;
+  width: 50rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .Form input {
-    margin-top: 1rem;
-    height: 4.5rem;
+  height: 4.5rem;
+  border: none;
+  border-bottom: 1px solid;
+}
+
+.Form input:focus {
+  outline: none;
+}
+
+.From input[type="date"]::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+
+.From input[type="date"]:focus:before,
+.From input[type="date"]:valid:before {
+  display: none;
 }
 
 .Form button {
-    margin-bottom: 5rem;
+  margin-bottom: 5rem;
+  width: 50rem;
+  height: 4rem;
+  font-size: 1.7rem;
+  background-color: black;
+  margin-top: 3rem;
+  color: white;
 }
 
 /* 평가 버튼 */
-.Radio_wrap{
-    display: flex;
-    flex-direction: row;
+.Radio_wrap {
+  display: flex;
+  flex-direction: row;
 }
 
-.Radio_wrap > label {
-    display: flex;
-    align-items: center;
+.Radio_wrap>label {
+  display: flex;
+  align-items: center;
 }
-
 
 /* 모달 */
 .Modal_wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+.EvalDetail,
 .project-details {
-    text-align: center;
-  }
-  
-  .project-name {
-    font-size: 2.4rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .project-info {
-    display: inline-block;
-    text-align: left;
-    margin-top: 1rem;
-  }
-  
-  .works-for {
-    margin-top: 10rem;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .works-for-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
+  background-color: #f5f5f5;
+  padding: 20px;
+  margin-bottom: 20px;
+}
 
-  .works-for-item-wrap {
-    display: flex;
-    align-items: center;
-    background-color: aqua;
-    margin-bottom: 2rem;
-  }
+.project-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.project-info {
+  margin-bottom: 10px;
+}
+
+.EvalDetailWrap,
+.detailItemWrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.detailItemWrap p {
+  margin-right: 1rem;
+}
+
+.detailItemWrap div {
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 0.1rem solid #ccc;
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+
+.detailItem {
+  background-color: #fff;
+  padding: 0.5rem 1rem;
   
-  .works-for-item {
-    margin-bottom: 1rem;
-    border: 0.1rem solid #ccc;
-    padding: 1rem;
-    margin-right: 1rem;
-  }
+}
+
+.works-for {
+  margin-bottom: 2rem;
+}
+
+.works-for-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 2rem 0 1rem ;
+}
+
+.works-for-item-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 1rem;
+}
+
+.works-for-item {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid #ccc;
+}
+
+.works-for-item p {
+  margin-bottom: 0.5rem;
+}
 
 
-  .detailItemWrap {
-    display: flex;
-    flex-direction: column;
-  }
+.detailItemWrap {
+  /* display: ; */
+}
 
-  .detailItem {
-    border: 0.1rem solid #ccc;
-  }
+.detailItem {
+  border: 0.1rem solid #ccc;
+}
+
+/* 평가 모달 */
+
+.EvalDetailName {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 2rem 0 1rem ;
+}
+
+.EvalDetailCount {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 2rem 0 1rem ;
+}
+
+.EvalWrap {
+  font-size: 1.2rem;
+  padding-bottom: 1rem;
+}
+
+.EvalDetailWrap{
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid #ccc;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 5rem;
+}
+
+.EvalDetailWrap p {
+text-align: center;
+margin-top: 0.8rem;
+font-size: 1.3rem;
+}
+
+/* CSS */
+.bar-chart-enter {
+  width: 0;
+}
+
+.bar-chart-enter-active {
+  width: 100%;
+  transition: width 500ms ease;
+}
 
 /* 개발자 결과 조회 */
 .EmployeeWrap {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 8rem 0 8rem 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 8rem 0 8rem 0;
 }
+
 .EmployeeWrap h1 {
-    font-size: 2rem;
-    margin-bottom: 4rem;
+  font-size: 2rem;
+  margin-bottom: 4rem;
 }
 
 .EmployeeTable {
-    width: 80%;
-    font-size: 2rem;
+  width: 80%;
+  font-size: 2rem;
 }
 
 .EmployeeTable thead {
-    background-color: grey;
-    color: white;
-    text-align: left;
+  background-color: #3b3b3b;
+  color: white;
+  text-align: left;
 }
 
 .EmployeeTable td,
 .EmployeeTable th {
-    padding: 2rem;
-    border-bottom: 0.1rem solid white;
+  padding: 2rem;
+  border-bottom: 0.1rem solid white;
 }
 
 .EmployeeTable tbody {
-    background-color: gainsboro;
+  background-color: gainsboro;
 }
 
-.Test {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: gray;
-}
-.TestDrop > select {
-    width: 14rem;
-    height: 4.6rem;
-    margin-right: 1rem;
+.FilterWrap {
+  margin-top: 2rem;
+  display: flex;
 }
 
+.FilterWrap input {
+  width: 15rem;
+  border-top: 1rem;
+  border-left: 1rem;
+  border-right: 1rem;
+  margin-right: 4.5rem;
+  padding-bottom: 1rem;
+}
+
+.FilterWrap input:focus {
+  outline: none;
+}
+
+.SkillLabel input {
+  width: 20rem;
+}

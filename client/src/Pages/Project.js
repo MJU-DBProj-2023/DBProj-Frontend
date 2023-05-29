@@ -135,13 +135,14 @@ const Project = () => {
             ) : (
               <input
                 type="text"
-                placeholder="검색"
+                placeholder="프로젝트를 검색하세요"
                 className="SearchInput"
                 onChange={handleChange}
               />
             )}
-            <input className="SearchBtn" type="submit" value="검색" />
+            <input className="SearchBtn" type="submit" value="" alt="검색" />
           </form>
+          <hr style={{ width: 50 + "rem" }} />
         </div>
       </div>
 

@@ -1,22 +1,38 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 const TestPage = () => {
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((response) => setPosts(response.data));
-  },[]);
+
+  const Drop = [
+    { id: "", value: "검색 구분" },
+    { id: "project_name", value: "프로젝트명" },
+    { id: "employee_name", value: "이름" },
+    { id: "not_working", value: "Not Working" },
+  ];
+  
+  
   return (
     <div>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <div>{post.address.geo.lat}</div>
-          </li>
-        ))}
-      </ul>
+      <div className="Test">
+        <div className="TestDrop">
+          <select>
+            {Drop.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.value}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="Searchkey_wrap">
+          <form>
+            <input
+              type="text"
+              placeholder="검색"
+              className="SearchInput"
+            />
+            <input className="SearchBtn" type="submit" value="검색" />
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

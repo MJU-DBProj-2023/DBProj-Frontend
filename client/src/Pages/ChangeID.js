@@ -39,16 +39,18 @@ const ChangeID = () => {
 
   return (
     <div>
-      <form className="login_wrap" onSubmit={handleSubmit}>
-        <div>현재 아이디: {user.id}</div>
+      <form className="change_login_wrap" onSubmit={handleSubmit}>
+        <h3 className="change_login_title">아이디 변경</h3>
+        <div className="chane_login_currId">귀하의 현재 아이디: {user.id}</div>
         <input
+          className="change_login_input"
           type="text"
-          placeholder="새로운 아이디"
+          placeholder="새로운 아이디를 입력하세요"
           name="newId"
           value={newId}
           onChange={(e) => setNewId(e.target.value)}
         />
-        <button type="submit">
+        <button className="change_login_submit" type="submit">
           아이디 변경{" "}
         </button>
       </form>

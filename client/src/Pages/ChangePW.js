@@ -79,10 +79,10 @@ const ChangePW = () => {
   return (
     <div className="Change_PW_wrap">
       <div>
-        <h3 className="change_password_title">비밀번호 변경</h3>
+        <h3 className="change_pw_title">비밀번호 변경</h3>
         <form onSubmit={handleEmail}>
-          <h3 className="change_password_title">
-            이메일 본인인증을 진행해주세요
+          <h3 className="change_pw_subtitle">
+            *이메일 본인인증을 진행해주세요
           </h3>
           <input
             type="email"
@@ -90,7 +90,9 @@ const ChangePW = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></input>
-          <button type="submit">인증번호 발송</button>
+          <button className="change_pw_submit" type="submit">
+            인증번호 발송
+          </button>
         </form>
         <form onSubmit={handleVerifyEmail}>
           <input
@@ -99,7 +101,9 @@ const ChangePW = () => {
             value={verify_code}
             onChange={(e) => setVerify_code(e.target.value)}
           ></input>
-          <button type="submit">인증번호 확인</button>
+          <button className="change_pw_submit" type="submit">
+            인증번호 확인
+          </button>
         </form>
         <form onSubmit={handleChangePW}>
           <input
@@ -120,7 +124,9 @@ const ChangePW = () => {
             value={checkPW}
             onChange={(e) => setCheckPW(e.target.value)}
           ></input>
-          <button type="submit">비밀번호 변경</button>
+          <button className="change_pw_submit" type="submit">
+            비밀번호 변경
+          </button>
         </form>
       </div>
     </div>

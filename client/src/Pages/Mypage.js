@@ -4,15 +4,13 @@ import "../styles/style.css";
 import profile from "../assets/profile.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import ModalComponent from "../Components/ModalComponent";
-import ProjComponent from "../Components/ProjComponent";
+import ProjListComponent from "../Components/ProjListComponent";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "../recoil/UserAtom";
 axios.defaults.withCredentials = true;
 
-
 const Mypage = () => {
-
-  const [user, setUser] = useRecoilState(UserAtom)
+  const [user, setUser] = useRecoilState(UserAtom);
   const [employee, setEmployee] = useState({});
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
@@ -27,17 +25,19 @@ const Mypage = () => {
     setModalIsOpen(false);
   };
 
-  console.log(user)
+  console.log(user);
 
   useEffect(() => {
     const renderData = async () => {
       try {
         const response = await axios.get("http://localhost:3001/mypage");
-        setEmployee(response.data.employee)
+        // setEmployee(response.data);
+        console.log(response);
       } catch (error) {
         if (error.response.status === 401) {
-          alert("로그인을 진행해 주세요")
-          navigate("/")        
+          alert("로그인을 진행해 주세요");
+          setUser([])
+          navigate("/");
         }
         console.log("error name", error);
         // API 호출이 실패한 경우에도 적절한 상태 업데이트 수행
@@ -45,11 +45,16 @@ const Mypage = () => {
     };
     renderData();
   }, []);
-    return (
+  return (
     <div>
+      <div className="Mypage_title_wrap">
+        <div className="Mypage_title">마이페이지</div>
+        <div className="Mypage_title_desc">귀하의 개인정보를 관리하세요.</div>
+      </div>
       <div className="User_wrap">
         <div className="Profile_wrap">
           <img src={profile} alt="Profile" />
+
           <div className="Userdata_wrap">
             <div>
               {employee.employee_name} ({employee.employee_id})
@@ -67,8 +72,8 @@ const Mypage = () => {
         </div>
       </div>
       <div className="Proj_wrap">
-      <ProjComponent projTitle="진행중" openModal={openModal} />
-      <ProjComponent projTitle="종료" openModal={openModal} />
+        <ProjListComponent projTitle="진행중" openModal={openModal} />
+        <ProjListComponent projTitle="종료" openModal={openModal} />
       </div>
       <ModalComponent
         isOpen={modalIsOpen}
