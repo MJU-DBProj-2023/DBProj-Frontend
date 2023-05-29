@@ -99,7 +99,7 @@ const Evaluation = () => {
                 >
                   <td>{result.project_name}</td>
                   <td>{result.avg_cus_rating}</td>
-                  <td>{result.avg_PM_rating}</td>
+                  <td>{result.avg_pm_rating}</td>
                   <td>{result.avg_co_rating}</td>
                 </tr>
               ))}

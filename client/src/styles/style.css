@@ -199,16 +199,13 @@ body {
 .User_wrap {
   display: flex;
   height: 11rem;
-  justify-content: space-around;
   align-items: center;
 }
 
 .Profile_wrap {
   display: flex;
-  width: 55rem;
-  height: 100%;
+  width: 70rem;
   font-size: 1.5rem;
-  overflow: hidden;
   border: 0.1rem solid gainsboro;
   border-radius: 1rem;
   margin-left: 10rem;
@@ -229,12 +226,16 @@ body {
   margin: 0.5rem 0 1.5rem 0.5rem;
 }
 
+.AllAvgWrap>div {
+  padding: 5rem;
+}
+
 .Change_wrap {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  margin-right: 90rem;
+  margin-right: 5rem;
 }
 
 .Change_wrap button {
@@ -267,7 +268,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin: 20rem 5rem 5rem 5rem;
+  margin: 8rem 5rem 5rem 5rem;
 }
 
 .ProjListWrap {
@@ -275,9 +276,21 @@ body {
   height: 50rem;
   background-color: #ccc;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5rem;
+}
+.Proj-Title {
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: #3b3b3b;
+  color: white;
+  padding: 1rem;
+  border-radius: 5rem;
+  width: 50%;
   text-align: center;
 }
-
 .Check_Proj_wrap>ul,
 .Proj_wrap>ul {
   width: 40rem;
@@ -462,11 +475,13 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 5rem;
 }
 
 /* 프로젝트컴포넌트 */
 
 .ProjTitle {
+  margin-top: 1rem;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -490,6 +505,21 @@ body {
 
 .ProjTable tbody {
   background-color: gainsboro;
+}
+
+/* 프로젝트 리스트 컴포넌트 */
+.ProjItem {
+  font-size: 1.5rem ;
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 1rem;
+  border-bottom: 0.3rem solid white;
+}
+
+.ProjAvg {
+  font-weight: bold;
+  margin-left: 0.5rem;
 }
 
 /*평가 조회*/
@@ -586,12 +616,14 @@ body {
   align-items: center;
 }
 .EvalDetail,
-.project-details {
+.project-details,
+.employee-details {
   background-color: #f5f5f5;
   padding: 20px;
   margin-bottom: 20px;
 }
 
+.employee-details>h1,
 .project-name {
   font-size: 24px;
   font-weight: bold;

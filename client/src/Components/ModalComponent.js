@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import axios from "axios";
+import ProjListComponent from "./ProjListComponent";
 Modal.setAppElement("#root");
 
 const ModalComponent = ({
@@ -10,6 +11,18 @@ const ModalComponent = ({
   selectedItemId,
 }) => {
   const [selectedItem, setSelectedItem] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false); // 모달 오픈
+  const [selectedItemID, setSelectedItemID] = useState(null); // 프로젝트 
+
+  const openModal = (itemId) => {
+    setSelectedItemID(itemId);
+    console.log(selectedItemId);
+    setModalIsOpen(true);
+  }; // 모달 오픈 시 프로젝트id를 itemid로 받고 모달 오픈 상태 T로 바꿈
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  }; // 모달 클로즈 시 모달 오픈 상태 F로 바꿈
 
   useEffect(() => {
     const fetchData = async (itemId) => {
@@ -17,7 +30,6 @@ const ModalComponent = ({
         // 서버에서 itemId에 해당하는 상세 정보를 가져오는 요청을 보냄
         let response;
         if (contentLabel === "직원 상세 정보") {
-          console.log("모달 상세아이디: ", itemId);
           response = await axios.get(
             `http://localhost:3001/employee/search/detail?employee_id=${itemId}`
           ); //직원 상세 정보 서버 요청
@@ -28,6 +40,8 @@ const ModalComponent = ({
           ); // 프로젝트 상세 정보 서버 요청
         }
         const selectedItemData = response.data; // 서버에서 받아온 상세 정보 데이터
+
+        console.log("서버에서 받아 온 상세 정보", selectedItemData);
         setSelectedItem(selectedItemData);
         // 선택된 항목의 데이터를 상태에 저장
 
@@ -45,21 +59,87 @@ const ModalComponent = ({
     if (contentLabel === "직원 상세 정보") {
       return (
         <>
-          <p>사번: {selectedItem.employee_id}</p>
-          <p>사원 이름: {selectedItem.employee_name}</p>
-          <p>주민등록번호: {selectedItem.rrno}</p>
-          <p>이메일: {selectedItem.email}</p>
-          <p>최종 학력: {selectedItem.education}</p>
-          <p>입사일: {selectedItem.start_employment}</p>
-          <p>주소: {selectedItem.address}</p>
-          <p>연봉: {selectedItem.salary}</p>
-          <p>직위: {selectedItem.position}</p>
-          <p>부서 ID: {selectedItem.dept_id}</p>
-          <p>매니저: {selectedItem.manager}</p>
-          <p>권한 코드: {selectedItem.auth_code}</p>
-          <p>스킬셋: {selectedItem.skill_set}</p>
-          <p>개발 레벨: {selectedItem.dev_level}</p>
-          <p>연차: {selectedItem.annual}</p>
+          <div className="employee-details">
+            <h1>{contentLabel}</h1>
+            <div className="detailItemWrap">
+              <p>사번</p>
+              <div>{selectedItem.employee.employee_id}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>사원명</p>
+              <div>{selectedItem.employee.employee_name}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>주민등록번호</p>
+              <div>{selectedItem.employee.rrno}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>이메일</p>
+              <div>{selectedItem.employee.email}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>최종 학력</p>
+              <div>{selectedItem.employee.education}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>입사일</p>
+              <div>{selectedItem.employee.start_employment}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>주소</p>
+              <div>{selectedItem.employee.address}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>연봉</p>
+              <div>{selectedItem.employee.salary}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>직위</p>
+              <div>{selectedItem.employee.position}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>부서</p>
+              <div>{selectedItem.employee.dept_id}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>권한 코드</p>
+              <div>{selectedItem.employee.auth_code}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>매니저</p>
+              <div>{selectedItem.employee.manager}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>스킬셋</p>
+              <div>{selectedItem.employee.skill_set}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>개발 레벨</p>
+              <div>{selectedItem.employee.dev_level}</div>
+            </div>
+            <div className="detailItemWrap">
+              <p>연차</p>
+              <div>{selectedItem.employee.annual}</div>
+            </div>
+          </div>
+          <div className="Proj_wrap">
+            <ProjListComponent
+              items={selectedItem.ongoingProjects}
+              openModal={openModal}
+              projTitle="진행중"
+            />
+            <ProjListComponent
+              items={selectedItem.completedProjects}
+              projTitle="종료"
+              openModal={openModal}
+            />
+            <ModalComponent
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              contentLabel="프로젝트 상세 정보"
+              selectedItemId={selectedItemID}
+            />
+          </div>
         </>
       );
     } else {
@@ -122,21 +202,23 @@ const ModalComponent = ({
               </div>
             </div>
             <div className="works-for">
-            <p className="works-for-title">프로젝트 진행 직원</p>
-            <div className="works-for-item-wrap">
-              {selectedItem[0].works_for.map((item) => (
-                <div className="works-for-item" key={item.employee_id}>
-                  <p>사번: {item.employee_id}</p>
-                  <p>이름: {item.employee_name}</p>
-                  <p>부서: {item.dept_id}</p>
-                  <p>직무: {item.job_name}</p>
-                </div>
-              ))}
+              <p className="works-for-title">프로젝트 진행 직원</p>
+              <div className="works-for-item-wrap">
+                {Object.keys(selectedItem[0].works_for).length === 0 ? (
+                  <p>프로젝트 진행 직원이 없습니다.</p>
+                ) : (
+                  selectedItem[0].works_for.map((item) => (
+                    <div className="works-for-item" key={item.employee_id}>
+                      <p>사번: {item.employee_id}</p>
+                      <p>이름: {item.employee_name}</p>
+                      <p>부서: {item.dept_id}</p>
+                      <p>직무: {item.job_name}</p>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
-          </div>
-
-          
         </>
       );
     }
@@ -149,12 +231,7 @@ const ModalComponent = ({
       contentLabel={contentLabel}
       style={{
         overlay: {
-          backgroundColor: 'rgba(0, 0, 0, 0.5)', // 모달 외부 배경색
-        },
-        content: {
-          width: '30%', // 모달 너비 설정
-          top: '10%', // 모달 상단 위치 설정
-          left: '35%', // 모달 좌측 위치 설정
+          backgroundColor: "rgba(0, 0, 0, 0.5)", // 모달 외부 배경색
         },
       }}
     >

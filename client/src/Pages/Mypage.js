@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/style.css";
-import profile from "../assets/profile.jpg";
+import profile from "../assets/profile_icon.png";
 import { Link, useNavigate } from "react-router-dom";
 import ModalComponent from "../Components/ModalComponent";
 import ProjListComponent from "../Components/ProjListComponent";
@@ -9,9 +9,24 @@ import { useRecoilState } from "recoil";
 import { UserAtom } from "../recoil/UserAtom";
 axios.defaults.withCredentials = true;
 
+const positionMap = {
+  P01: "최고경영자",
+  P02: "사장",
+  P03: "부사장",
+  P04: "부장",
+  P05: "차장",
+  P06: "과장",
+  P07: "주임",
+  P08: "대리",
+  P09: "사원",
+};
+
 const Mypage = () => {
   const [user, setUser] = useRecoilState(UserAtom);
   const [employee, setEmployee] = useState({});
+  const [allAvg, setAllAvg] = useState();
+  const [onGoingProj, setOnGoingProj] = useState([]);
+  const [completedProj, setCompletedProj] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const navigate = useNavigate();
@@ -31,12 +46,15 @@ const Mypage = () => {
     const renderData = async () => {
       try {
         const response = await axios.get("http://localhost:3001/mypage");
-        // setEmployee(response.data);
-        console.log(response);
+        console.log(response.data);
+        setEmployee(response.data.employee);
+        setOnGoingProj(response.data.ongoingProjects);
+        setCompletedProj(response.data.completedProjects);
+        setAllAvg(response.data.all_avg[0]);
       } catch (error) {
         if (error.response.status === 401) {
           alert("로그인을 진행해 주세요");
-          setUser([])
+          setUser([]);
           navigate("/");
         }
         console.log("error name", error);
@@ -45,6 +63,25 @@ const Mypage = () => {
     };
     renderData();
   }, []);
+  // const renderStarIcons = (rating) => {
+  //   const filledStars = Math.round(rating); // 평점에 따라 채워진 별의 개수를 결정
+  //   const emptyStars = 5 - filledStars; // 남은 빈 별의 개수를 결정
+
+  //   const starIcons = [];
+
+  //   // 채워진 별 아이콘 추가
+  //   for (let i = 0; i < filledStars; i++) {
+  //     starIcons.push(<span key={i}>★</span>);
+  //   }
+
+  //   // 빈 별 아이콘 추가
+  //   for (let i = 0; i < emptyStars; i++) {
+  //     starIcons.push(<span key={filledStars + i}>☆</span>);
+  //   }
+
+  //   return starIcons;
+  // };
+
   return (
     <div>
       <div className="Mypage_title_wrap">
@@ -59,8 +96,18 @@ const Mypage = () => {
             <div>
               {employee.employee_name} ({employee.employee_id})
             </div>
-            <div>{employee.position}</div>
+            <div>
+              {employee.position} {positionMap[employee.position]}
+            </div>
           </div>
+          {allAvg && (
+            <div className="AllAvgWrap">
+            {/* <div className="star_rating_fill">{renderStarIcons(allAvg)}</div> */}
+            
+            <div><p>나의 평균 평점</p>{allAvg.all_avg}</div>
+          </div>
+          )}
+          
         </div>
         <div className="Change_wrap">
           <button className="Btn_changeID">
@@ -72,8 +119,16 @@ const Mypage = () => {
         </div>
       </div>
       <div className="Proj_wrap">
-        <ProjListComponent projTitle="진행중" openModal={openModal} />
-        <ProjListComponent projTitle="종료" openModal={openModal} />
+        <ProjListComponent
+          items={onGoingProj}
+          projTitle="진행중"
+          openModal={openModal}
+        />
+        <ProjListComponent
+          items={completedProj}
+          projTitle="종료"
+          openModal={openModal}
+        />
       </div>
       <ModalComponent
         isOpen={modalIsOpen}

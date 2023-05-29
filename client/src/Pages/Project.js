@@ -73,7 +73,7 @@ const Project = () => {
           `http://localhost:3001/index/search?${selectValue}=${searchKeyword}`
         );
         if (
-          response.data.res_inProgressProjects.length !== 0 &&
+          response.data.res_inProgressProjects.length !== 0 ||
           response.data.completedProjects !== 0
         ) {
           // 검색 결과가 있는 경우

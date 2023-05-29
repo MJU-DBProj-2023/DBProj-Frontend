@@ -26,7 +26,6 @@ const ProjComponent = ({ items, projTitle, openModal }) => {
         <tbody>
           {items && items.map((item) => (
             <tr
-              className="ProjItem"
               key={item.project_id}
               onClick={() => openModal(item.project_id)}
             >
