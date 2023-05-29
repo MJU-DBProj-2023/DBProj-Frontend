@@ -38,6 +38,9 @@ const CreateProj = () => {
       })
       .catch((error) => {
         // 요청 실패 시 처리할 작업
+        if (error.code === "ERR_BAD_REQUEST") {
+          alert(error.response.data);
+        }
         console.error("요청이 실패하였습니다.", error);
       });
   };

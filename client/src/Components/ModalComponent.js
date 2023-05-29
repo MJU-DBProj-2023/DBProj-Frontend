@@ -82,7 +82,7 @@ const ModalComponent = ({
               </div>
               <div className="detailItemWrap">
                 <p>PM</p>
-                <div>{selectedItem[0].PM}</div>
+                <div>{selectedItem[0].pm}</div>
               </div>
               <div className="detailItemWrap">
                 <p>예산</p>

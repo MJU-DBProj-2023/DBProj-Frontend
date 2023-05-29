@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Modal from "react-modal";
 import axios from "axios";
 

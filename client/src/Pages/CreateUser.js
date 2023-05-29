@@ -29,7 +29,7 @@ const CreateUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
+    console.log(formData);
 
     axios
       .post("http://localhost:3001/admin/createUser", formData)
@@ -37,10 +37,13 @@ const CreateUser = () => {
         // 요청 성공 시 처리할 작업
         console.log("요청이 성공적으로 전송되었습니다.");
         console.log("응답 데이터:", response.data);
-        alert("직원을 등록하였습니다.")
+        alert("직원을 등록하였습니다.");
       })
       .catch((error) => {
         // 요청 실패 시 처리할 작업
+        if (error.code === "ERR_BAD_REQUEST") {
+          alert(error.response.data);
+        }
         console.error("요청이 실패하였습니다.", error);
       });
   };
