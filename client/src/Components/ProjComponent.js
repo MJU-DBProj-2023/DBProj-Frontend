@@ -16,11 +16,11 @@ const ProjComponent = ({ items, projTitle, openModal }) => {
         <thead>
           <tr>
             <th>프로젝트 ID</th>
-            <th>프로젝트 이름</th>
+            <th>프로젝트명</th>
             <th>예산</th>
             <th>시작일</th>
             <th>종료일</th>
-            <th>고객</th>
+            <th>발주처</th>
           </tr>
         </thead>
         <tbody>

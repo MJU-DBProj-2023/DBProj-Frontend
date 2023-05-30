@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 import ProjListComponent from "./ProjListComponent";
+import Minus from "../assets/minus.png";
 Modal.setAppElement("#root");
 
 const ModalComponent = ({
@@ -10,9 +11,9 @@ const ModalComponent = ({
   contentLabel,
   selectedItemId,
 }) => {
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null); // 상세 정보 배열
   const [modalIsOpen, setModalIsOpen] = useState(false); // 모달 오픈
-  const [selectedItemID, setSelectedItemID] = useState(null); // 프로젝트 
+  const [selectedItemID, setSelectedItemID] = useState(null); // 프로젝트ID
 
   const openModal = (itemId) => {
     setSelectedItemID(itemId);
@@ -23,6 +24,16 @@ const ModalComponent = ({
   const closeModal = () => {
     setModalIsOpen(false);
   }; // 모달 클로즈 시 모달 오픈 상태 F로 바꿈
+
+  const ClickMinus = async (employee) => {
+    try {
+      await axios.delete(
+        `http://localhost:3001/worksfor/delete?employee_id=${employee}&project_id=${selectedItemId}`
+      );
+    } catch (error) {
+      console.error("에러", error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async (itemId) => {
@@ -209,10 +220,19 @@ const ModalComponent = ({
                 ) : (
                   selectedItem[0].works_for.map((item) => (
                     <div className="works-for-item" key={item.employee_id}>
-                      <p>사번: {item.employee_id}</p>
-                      <p>이름: {item.employee_name}</p>
-                      <p>부서: {item.dept_id}</p>
-                      <p>직무: {item.job_name}</p>
+                      <div>
+                        <p>사번: {item.employee_id}</p>
+                        <p>이름: {item.employee_name}</p>
+                        <p>부서: {item.dept_id}</p>
+                        <p>직무: {item.job_name}</p>
+                      </div>
+                      <div className="MinusBtnWrap">
+                        <img
+                          src={Minus}
+                          alt="프로젝트 내 직원 삭제"
+                          onClick={() => ClickMinus(item.employee_id)}
+                        />
+                      </div>
                     </div>
                   ))
                 )}

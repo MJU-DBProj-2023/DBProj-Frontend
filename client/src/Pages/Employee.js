@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import ModalComponent from "../Components/ModalComponent";
+import Plus from "../assets/plus.jpg";
+import { useRecoilState } from "recoil";
+import { InsertEmployeeAtom } from "../recoil/UserAtom";
+import { Navigate, Link } from "react-router-dom";
+
 axios.defaults.withCredentials = true;
 
 const Drop = [
@@ -16,7 +21,10 @@ const Employee = () => {
   const [inputText, setInputText] = useState(""); // 검색값
   const [searchResults, setSearchResults] = useState([]); // 검색 결과
   const [isSearched, setIsSearched] = useState(false); // 결과 visible T/F
-  const [selectedEmployeeId, setSelectedEmployeeId] = useState(""); // 선택된 사번 상태 추가
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState(""); // 선택된 사번
+  const [insertEmployee, setInsertEmployee] =
+    useRecoilState(InsertEmployeeAtom); // 프로젝트 투입으로 넘길 employeeID
+
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
   const [filterLevel, setFilterLevel] = useState(""); // 필터링 개발레벨값
   const [filterSkill, setFilterSkill] = useState(""); // 필터링 스킬셋값
@@ -47,6 +55,11 @@ const Employee = () => {
     const job = e.target.value;
     setFilterJob(job);
   }; // 직책
+
+  const handlePlusButtonClick = (employeeId) => {
+    setInsertEmployee("");
+    setInsertEmployee(employeeId);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -211,6 +224,15 @@ const Employee = () => {
                   <td>{result.skill_set}</td>
                   <td>{result.dev_level}</td>
                   <td>{Array.from(new Set(result.job_name)).join(", ")}</td>
+
+                  <td className="PlusBtnWrap">
+                    <Link
+                      to="/executive/insertEmployee"
+                      onClick={() => handlePlusButtonClick(result.employee_id)}
+                    >
+                      <img src={Plus} alt="프로젝트 내 투입" />
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>

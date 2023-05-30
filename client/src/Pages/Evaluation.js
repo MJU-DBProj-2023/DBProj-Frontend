@@ -23,6 +23,7 @@ const Evaluation = () => {
         const response = await axios.get(
           `http://localhost:3001/eval/search?project_name=${inputText}`
         );
+        console.log("평가 상세 조회 마운트: ", response.data)
         const responseData = response.data.projectNames;
         console.log(responseData);
         if (responseData.length === 0) {
@@ -53,6 +54,7 @@ const Evaluation = () => {
     const renderData = async () => {
       try {
         const response = await axios.get("http://localhost:3001/eval");
+        console.log("평가 조회 마운트: ", response.data)
         setSearchResults(response.data.projectNames);
       } catch (error) {
         console.log("error name", error);

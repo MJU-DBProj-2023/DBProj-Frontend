@@ -11,6 +11,7 @@ const EvalModalComponent = ({ isOpen, onRequestClose, projectId }) => {
         const response = await axios.get(
           `http://localhost:3001/eval/detail?project_id=${projectId}`
         );
+        console.log("상세 정보:", response.data)
         setEvalDetails(response.data);
       } catch (error) {
         console.error(error);
@@ -53,7 +54,7 @@ const EvalModalComponent = ({ isOpen, onRequestClose, projectId }) => {
   
     const barStyles = {
       width: `${barWidth}%`,
-      backgroundColor: 'red',
+      backgroundColor: '#DF6464',
       height: '2rem',
       transition: 'width 1s ease-in-out'
     };
